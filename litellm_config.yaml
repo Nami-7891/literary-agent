@@ -1,0 +1,101 @@
+model_list:
+- model_name: planner-agent
+  litellm_params:
+    model: gemini/gemini-3.1-flash-lite
+    api_key: os.environ/GOOGLE_API_KEY
+    rpm: 12
+    timeout: 60
+- model_name: planner-agent-fallback
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 45
+- model_name: planner-verifier
+  litellm_params:
+    model: cohere/command-r-08-2024
+    api_key: os.environ/COHERE_API_KEY
+    rpm: 35
+    timeout: 45
+- model_name: analyzer-agent
+  litellm_params:
+    model: groq/qwen/qwen3.8-27b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 45
+- model_name: analyzer-agent-fallback
+  litellm_params:
+    model: gemini/gemini-3.1-flash-lite
+    api_key: os.environ/GOOGLE_API_KEY
+    rpm: 12
+    timeout: 60
+- model_name: analyzer-verifier
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 45
+- model_name: cartographer-agent
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 45
+- model_name: cartographer-agent-fallback
+  litellm_params:
+    model: gemini/gemini-3.1-flash-lite
+    api_key: os.environ/GOOGLE_API_KEY
+    rpm: 12
+    timeout: 60
+- model_name: cartographer-verifier
+  litellm_params:
+    model: zai/glm-4.5-flash
+    api_key: os.environ/ZHIPU_API_KEY
+    rpm: 30
+    timeout: 45
+- model_name: synthesizer-agent
+  litellm_params:
+    model: gemini/gemini-3.5-flash
+    api_key: os.environ/GOOGLE_API_KEY
+    rpm: 12
+    timeout: 60
+- model_name: synthesizer-agent-fallback
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 45
+- model_name: synthesizer-verifier
+  litellm_params:
+    model: cohere/command-r-08-2024
+    api_key: os.environ/COHERE_API_KEY
+    rpm: 35
+    timeout: 45
+- model_name: chat-agent
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+    rpm: 25
+    timeout: 30
+- model_name: chat-agent-fallback
+  litellm_params:
+    model: gemini/gemini-3.1-flash-lite
+    api_key: os.environ/GOOGLE_API_KEY
+    rpm: 12
+    timeout: 45
+router_settings:
+  routing_strategy: latency-based-routing
+  cooldown_time: 30
+  allowed_fails: 1
+  num_retries: 2
+  fallbacks:
+  - planner-agent:
+    - planner-agent-fallback
+  - analyzer-agent:
+    - analyzer-agent-fallback
+  - cartographer-agent:
+    - cartographer-agent-fallback
+  - synthesizer-agent:
+    - synthesizer-agent-fallback
+  - chat-agent:
+    - chat-agent-fallback

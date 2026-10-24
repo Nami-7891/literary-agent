@@ -1,0 +1,28 @@
+# Environment & Secrets
+.env
+.env.*
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Model Weights & Caches
+.fastembed_cache/
+models_cache/
+
+# Editor Settings
+.vscode/
+.idea/
+
+# Local Data & Test Artifacts
+data/
+*.log
+
+# Framework Hidden Cache (if generated)
+.agents/
+AGENTS.md
