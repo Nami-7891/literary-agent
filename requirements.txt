@@ -1,0 +1,16 @@
+streamlit
+python-dotenv
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain-text-splitters
+langgraph
+qdrant-client
+fastembed
+folium
+streamlit-folium
+streamlit-agraph
+nltk
+requests
+pyyaml
